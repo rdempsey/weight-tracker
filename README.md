@@ -6,16 +6,18 @@ I got sick of having to track all my food down to the calorie when I can predict
 
 ### Requirements
 
-MongoDB >= 3.0.4
-Python >= 3.3.5
-Flask >= 0.10.1
-flask-bootstrap >= 3.3.5.2
-flask-wtf >= 0.12
-pymongo >= 3.0.3
-wtf >= 2.0.2
+* MongoDB >= 3.0.4
+* Python >= 3.3.5
+* Flask >= 0.10.1
+* flask-bootstrap >= 3.3.5.2
+* flask-wtf >= 0.12
+* pymongo >= 3.0.3
+* wtf >= 2.0.2
 
 
 ### Running Weight Tracker
+
+Install all of the required Python libraries.
 
 Download, install and then run [MongoDB](https://www.mongodb.org/)
 
@@ -25,10 +27,10 @@ At a minimum, fill in the details for your MongoDB installation in the MongoDB s
 
 In the root directory, run the following command (on Mac or Linux) to make the index.py file executable
   
-  chmod +x ./index.py
+    chmod +x ./index.py
 
 Run the index.py file to start Weight Tracker
 
-  ./index.py
+    ./index.py
 
-Start tracking your stats!
+Start tracking your stats by browsing to http://localhost:5000
