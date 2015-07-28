@@ -4,7 +4,7 @@ Weight Tracker is a Flask application you can use to track and then predict your
 
 I got sick of having to track all my food down to the calorie when I can predict outcomes based on overall trends and tracking a few key metrics - weight, body fat %, and a few body measurements.
 
-### Requirmements
+### Requirements
 
 MongoDB >= 3.0.4
 Python >= 3.3.5
