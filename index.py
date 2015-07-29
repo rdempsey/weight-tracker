@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, make_response, request, redirect
-from flask_bootstrap import Bootstrap
+# from flask_bootstrap import Bootstrap
 from flask_wtf import Form
 from wtforms import StringField
 from wtforms.fields.html5 import DateField
@@ -12,7 +12,7 @@ import configparser
 
 app = Flask(__name__)
 app.secret_key = '2bN9UUaBpcjrxR'
-Bootstrap(app)
+# Bootstrap(app)
 
 def connect():
   # Read the config file and get the goodies
@@ -52,7 +52,7 @@ def get_measurement_history():
 @app.route("/")
 def index():
   form = MeasurementsForm()
-  response = make_response(render_template("index.html", title='Welcome to Weight Tracker', measurements=get_measurement_history(), form=form))
+  response = make_response(render_template("index.html", title='Welcome', measurements=get_measurement_history(), form=form))
   return response
 
 @app.route("/add-measurements", methods=['POST'])
@@ -72,7 +72,7 @@ def write():
                                 })
     # Redirect to the home page
     return redirect ("/")
-  response = make_response(render_template("index.html", title='Welcome to Weight Tracker', measurements=get_measurement_history(), form=form))
+  response = make_response(render_template("index.html", title='Welcome', measurements=get_measurement_history(), form=form))
   return response
 
 if __name__ == '__main__':
