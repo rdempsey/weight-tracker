@@ -38,31 +38,31 @@ class MeasurementsForm(Form):
   abdominal = StringField('Abdominal')
   thigh = StringField('Thigh')
 
-def get_weight_history():
+def get_measurement_history():
   # Connect to the database
   client = connect()
   # Get a database
   db = client.weighttracker
-  # Get all of the weights in the collection
-  my_weights = [x for x in db.weights.find()]
-  # Return the list of weights
-  return my_weights
+  # Get all of the measurements in the collection
+  my_measurements = [x for x in db.measurements.find()]
+  # Return the list of measurements
+  return my_measurements
 
 
 @app.route("/")
 def index():
   form = MeasurementsForm()
-  response = make_response(render_template("index.html", weights=get_weight_history(), form=form))
+  response = make_response(render_template("index.html", title='Welcome to Weight Tracker', measurements=get_measurement_history(), form=form))
   return response
 
-@app.route("/add-weight", methods=['POST'])
+@app.route("/add-measurements", methods=['POST'])
 def write():
   form = MeasurementsForm()
   if form.validate_on_submit():
     client = connect()
     db = client.weighttracker
     # Get an oid
-    oid = db.weights.insert_one({
+    oid = db.measurements.insert_one({
                                   "date":request.form.get("date"),
                                   "weight":request.form.get("weight"),
                                   "body_fat_percentage":request.form.get("body_fat_percentage"),
@@ -72,7 +72,7 @@ def write():
                                 })
     # Redirect to the home page
     return redirect ("/")
-  response = make_response(render_template("index.html", weights=get_weight_history(), form=form))
+  response = make_response(render_template("index.html", title='Welcome to Weight Tracker', measurements=get_measurement_history(), form=form))
   return response
 
 if __name__ == '__main__':

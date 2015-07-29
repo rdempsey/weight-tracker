@@ -4,7 +4,7 @@
 <link rel="stylesheet"
       href="{{url_for('static', filename='flatly.css')}}">
 {% endblock %}
-{% block title %}Weight Tracker{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block navbar %}
 <div class="navbar navbar-fixed-top">
@@ -16,7 +16,7 @@
   <div class="col-lg-6">
       <h1>Weight Tracker</h1>
       <div class="well bs-component">
-        <form action="/add-weight" method="POST" class="form-horizontal">
+        <form action="/add-measurements" method="POST" class="form-horizontal">
           {{ form.hidden_tag() }}
           <fieldset>
             <legend>New Entry</legend>
@@ -56,7 +56,7 @@
 
   <div class="bs-docs-section">
     <div class="col-lg-10">
-      <h1>Weight History</h1>
+      <h1>Measurement History</h1>
       <table class="table table-striped table-hover ">
         <tr>
           <th>Date</th>
@@ -66,14 +66,14 @@
           <th>Abdominal</th>
           <th>Thigh</th>
         </tr>
-        {% for weight in weights %}
+        {% for measurement in measurements %}
         <tr>
-          <td>{{weight.date}}</td>
-          <td>{{weight.weight}}</td>
-          <td>{{weight.body_fat_percentage}}</td>
-          <td>{{weight.suprailiac}}</td>
-          <td>{{weight.abdominal}}</td>
-          <td>{{weight.thigh}}</td>
+          <td>{{measurement.date}}</td>
+          <td>{{measurement.weight}}</td>
+          <td>{{measurement.body_fat_percentage}}</td>
+          <td>{{measurement.suprailiac}}</td>
+          <td>{{measurement.abdominal}}</td>
+          <td>{{measurement.thigh}}</td>
         </tr>
         {% endfor %}
       </table>
