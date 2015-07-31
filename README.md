@@ -41,3 +41,5 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 * Add a food journal
 * Add pagination to the measurement history
 * Add a predictive model for weight
+* Add a "I am the type of person who..." section and show a different one each time someone hits the home page
+* Add charty goodness to the homepage to show progress
