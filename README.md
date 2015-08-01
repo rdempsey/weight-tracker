@@ -4,6 +4,7 @@ Weight Tracker is a Flask application you can use to track and then predict your
 
 I got sick of having to track all my food down to the calorie when I can predict outcomes based on overall trends and tracking a few key metrics - weight, body fat %, and a few body measurements along with supplements and eating habits.
 
+
 ### Requirements
 
 * [Python](http://continuum.io/downloads) >= 3.3.5
@@ -41,11 +42,16 @@ Run the index.py file to start Weight Tracker
 
 Start tracking your stats by browsing to [http://localhost:5000](http://localhost:5000)
 
+### Features
+
+* Track weight, body fat percentage, and three body measurements
+* Add and manage inspirational phrases
+
+
 ### The ToDo List
 
+* Add pagination to the measurement history
 * Add supplement intake tracking
 * Add a food journal
-* Add pagination to the measurement history
-* Add a predictive model for weight
-* Add a "I am the type of person who..." section and show a different one each time someone hits the home page
 * Add charty goodness to the homepage to show progress
+* Add a predictive model for weight
