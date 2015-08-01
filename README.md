@@ -6,18 +6,24 @@ I got sick of having to track all my food down to the calorie when I can predict
 
 ### Requirements
 
-* [MongoDB](https://www.mongodb.org/) >= 3.0.4
 * [Python](http://continuum.io/downloads) >= 3.3.5
+* [MongoDB](https://www.mongodb.org/) >= 3.0.4
 * [Flask](http://flask.pocoo.org/) >= 0.10.1
-* [flask-bootstrap](http://pythonhosted.org/Flask-Bootstrap/) >= 3.3.5.2
-* [flask-wtf](https://flask-wtf.readthedocs.org/en/latest/) >= 0.12
-* [pymongo](https://api.mongodb.org/python/current/) >= 3.0.3
-* [wtf](https://pypi.python.org/pypi/WTForms) >= 2.0.2
+* [flask-script](https://github.com/smurfix/flask-script) >= 2.0.5
+* [WTForms](https://github.com/wtforms/wtforms) >= 2.0.2
+* [mongoengine](http://mongoengine.org/) >= 0.10.0
+* [flask-mongoengine](https://github.com/MongoEngine/flask-mongoengine) >= 0.7.1
 
 
 ### Running Weight Tracker
 
 Install all of the required Python libraries.
+
+    pip install flask
+    pip install flask-script
+    pip install WTForms
+    pip install mongoengine
+    pip install flask_mongoengine
 
 Download, install and then run [MongoDB](https://www.mongodb.org/)
 
@@ -25,13 +31,13 @@ Rename config/example-config.ini to config/config.ini
 
 At a minimum, fill in the details for your MongoDB installation in the MongoDB section of the config file.
 
-In the root directory, run the following command (on Mac or Linux) to make the index.py file executable
+In the root directory, run the following command (on Mac or Linux) to make the manage.py file executable
   
-    chmod +x ./index.py
+    chmod +x ./manage.py
 
 Run the index.py file to start Weight Tracker
 
-    ./index.py
+    python manage.py runserver
 
 Start tracking your stats by browsing to [http://localhost:5000](http://localhost:5000)
 

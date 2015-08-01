@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+<h1>Inspiration</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-striped table-hover ">
+      <tbody>
+        <tr>
+          <td>Phrase</td>
+          <td>{{ inspiration.weight }}</td>
+        </tr>
+        <tr>
+          <td>Created On</td>
+          <td>{{ inspiration.created_at.strftime('%H:%M %Y-%m-%d') }}</td>
+        </tr>
+        <tr>
+          <td>Updated On</td>
+          <td>{{ inspiration.updated_at.strftime('%H:%M %Y-%m-%d') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="bs-component">
+      <div class="well text-right">
+        <a href="{{ url_for('inspirations.list') }}" class="btn btn-default">Back</a> 
+        <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">Add an Inspiration</a> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

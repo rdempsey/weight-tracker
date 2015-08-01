@@ -1,0 +1,25 @@
+{% import "_forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block page_header %}
+<h1>Add A New Measurement</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-6">
+    <div class="bs-component">
+      <form action="." method="post" class="form-horizontal">
+        {{ form.hidden_tag() }}
+        {{ forms.render(form) }}
+        <div class="form-group text-right">
+          <div class="col-lg-10 col-lg-offset-2">
+            <a href="{{ url_for('measurements.list') }}" class="btn btn-default">Cancel</a>
+            <input type="submit" value="Save" class="btn btn-primary">
+          </div>
+        </div>
+      </form>
+    </div
+  </div>
+</div>
+{% endblock %}

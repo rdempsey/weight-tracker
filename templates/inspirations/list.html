@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+<div class="col-lg-8">
+  <div class="bs-component">
+    <h1>My Inspirations</h1>
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="bs-component text-right">
+    <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">Add an Inspiration</a> 
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped table-hover">
+  <tr>
+    <th>Phrase</th>
+    <th>Created On</th>
+    <th>&nbsp;</th>
+  </tr>
+  {% for inspiration in inspirations %}
+  <tr>
+    <td><a href="{{ url_for('inspirations.show', phrase=inspiration.phrase) }}">{{ inspiration.phrase }}</a></td>
+    <td>{{inspiration.created_at}}</td>
+    <td><a href="{{ url_for('inspirations.edit', phrase=inspiration.phrase) }}">Edit</a></td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="bs-component">
+      <div class="well text-right">
+        <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">Add an Inspiration</a> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
