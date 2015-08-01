@@ -22,6 +22,7 @@
     <th>Suprailiac</th>
     <th>Abdominal</th>
     <th>Thigh</th>
+    <th>&nbsp;</th>
   </tr>
   {% for measurement in measurements %}
   <tr>
@@ -31,6 +32,7 @@
     <td>{{measurement.suprailiac}}</td>
     <td>{{measurement.abdominal}}</td>
     <td>{{measurement.thigh}}</td>
+    <td><a href="{{ url_for('measurements.edit', date=measurement.date) }}">Edit</a></td>
   </tr>
   {% endfor %}
 </table>

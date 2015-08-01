@@ -75,4 +75,4 @@ measurements.add_url_rule('/measurements/', view_func=ListMeasurements.as_view('
 measurements.add_url_rule('/measurements/new/', view_func=NewMeasurement.as_view('new'))
 measurements.add_url_rule('/measurements/create/', defaults={'date': None}, view_func=NewMeasurement.as_view('create'))
 measurements.add_url_rule('/measurements/<date>/', view_func=ShowMeasurement.as_view('show'))
-measurements.add_url_rule('/measurements/edit/<date>/', view_func=EditMeasurement.as_view('edit'))
+measurements.add_url_rule('/measurements/edit/<date>/', view_func=NewMeasurement.as_view('edit'))

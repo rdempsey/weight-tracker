@@ -1,11 +1,8 @@
 <html>
   <head>
-    {% if title %}
-    <title>{{ title }} - Weight Tracker</title>
-    {% else %}
-    <title>Welcome to Weight Tracker</title>
-    {% endif %}
+    <title>Weight Tracker</title>
     <link rel="stylesheet" href="{{url_for('static', filename='flatly.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   </head>
   <body>
     <div class="navbar navbar-default navbar-fixed-top">
