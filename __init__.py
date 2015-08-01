@@ -22,7 +22,7 @@ db = MongoEngine(app)
 
 def register_blueprints(app):
     # Prevents circular imports
-    from weighttracker.views import measurements
+    from weighttracker.views.measurement_views import measurements
     app.register_blueprint(measurements)
 
 register_blueprints(app)
