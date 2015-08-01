@@ -24,6 +24,8 @@ def register_blueprints(app):
     # Prevents circular imports
     from weighttracker.views.measurement_views import measurements
     app.register_blueprint(measurements)
+    from weighttracker.views.inspiration_views import inspirations
+    app.register_blueprint(inspirations)
 
 register_blueprints(app)
 
