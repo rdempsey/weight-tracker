@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+
+{% block page_header %}
+<h1>{{ measurement.date }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-striped table-hover ">
+      <tbody>
+        <tr>
+          <td>Weight</td>
+          <td>{{ measurement.weight }}</td>
+        </tr>
+        <tr>
+          <td>Body Fat Percentage</td>
+          <td>{{ measurement.body_fat_percentage }}</td>
+        </tr>
+        <tr>
+          <td>Suprailiac</td>
+          <td>{{ measurement.suprailiac }}</td>
+        </tr>
+        <tr>
+          <td>Abdominal</td>
+          <td>{{ measurement.abdominal }}</td>
+        </tr>
+        <tr>
+          <td>Thigh</td>
+          <td>{{ measurement.thigh }}</td>
+        </tr>
+        <tr>
+          <td>Created On</td>
+          <td>{{ measurement.created_at.strftime('%H:%M %Y-%m-%d') }}</td>
+        </tr>
+        <tr>
+          <td>Updated On</td>
+          <td>{{ measurement.updated_at.strftime('%H:%M %Y-%m-%d') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="bs-component">
+      <div class="well text-right">
+        <a href="{{ url_for('measurements.list') }}" class="btn btn-default">Back</a> 
+        <a href="{{ url_for('measurements.new') }}" class="btn btn-primary">Add a Measurement</a> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
