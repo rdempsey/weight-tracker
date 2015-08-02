@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
+from flask import Flask, render_template
 from flask.ext.mongoengine import MongoEngine, MongoEngineSessionInterface
 import configparser
 
@@ -28,6 +28,12 @@ def register_blueprints(app):
     app.register_blueprint(inspirations)
 
 register_blueprints(app)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+
+def catch_all(path):
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
