@@ -24,7 +24,7 @@
     <th>Thigh</th>
     <th>&nbsp;</th>
   </tr>
-  {% for measurement in measurements %}
+  {% for measurement in measurements.items %}
   <tr>
     <td><a href="{{ url_for('measurements.show', date=measurement.date) }}">{{ measurement.date }}</a></td>
     <td>{{measurement.weight}}</td>
@@ -39,10 +39,21 @@
 <div class="row">
   <div class="col-lg-12">
     <div class="bs-component">
-      <div class="well text-right">
-        <a href="{{ url_for('measurements.new') }}" class="btn btn-primary">Add a Measurement</a> 
+      <div class="well">
+        {%- for page in measurements.iter_pages() %}
+          {% if page %}
+            {% if page != measurements.page %}
+                <a href="{{ url_for('measurements.listpage', page=page) }}">{{ page }}</a>
+            {% else %}
+                <strong>{{ page }}</strong>
+            {% endif %}
+          {% else %}
+            <span class=ellipsis>…</span>
+          {% endif %}
+        {%- endfor %}
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %}

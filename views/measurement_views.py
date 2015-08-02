@@ -8,10 +8,9 @@ measurements = Blueprint('measurements', __name__, template_folder='templates')
 
 class ListMeasurements(MethodView):
 
-  def get(self):
-    measurements = Measurement.objects.all()
+  def get(self, page=1):
+    measurements = Measurement.objects.paginate(page, per_page=10)
     return render_template('measurements/list.html', measurements=measurements)
-
 
 
 class ShowMeasurement(MethodView):
@@ -36,7 +35,7 @@ class NewMeasurement(MethodView):
     if date:
       measurement = Measurement.objects.get_or_404(date=date)
       if request.method == 'POST':
-        form = form_cls(request.form, inital=measurement._data)
+        form = form_cls(request.form, initial=measurement._data)
       else:
         form = form_cls(obj=measurement)
     else:
@@ -72,6 +71,7 @@ class NewMeasurement(MethodView):
 
 # Register the urls
 measurements.add_url_rule('/measurements/', view_func=ListMeasurements.as_view('list'))
+measurements.add_url_rule('/measurements/<int:page>/', view_func=ListMeasurements.as_view('listpage'))
 measurements.add_url_rule('/measurements/new/', view_func=NewMeasurement.as_view('new'))
 measurements.add_url_rule('/measurements/create/', defaults={'date': None}, view_func=NewMeasurement.as_view('create'))
 measurements.add_url_rule('/measurements/<date>/', view_func=ShowMeasurement.as_view('show'))

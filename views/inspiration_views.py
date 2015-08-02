@@ -8,10 +8,9 @@ inspirations = Blueprint('inspirations', __name__, template_folder='templates')
 
 class ListInspirations(MethodView):
 
-  def get(self):
-    inspirations = Inspiration.objects.all()
+  def get(self, page=1):
+    inspirations = Inspiration.objects.paginate(page, per_page=10)
     return render_template('inspirations/list.html', inspirations=inspirations)
-
 
 
 class ShowInspiration(MethodView):
@@ -72,6 +71,7 @@ class NewInspiration(MethodView):
 
 # Register the urls
 inspirations.add_url_rule('/inspirations/', view_func=ListInspirations.as_view('list'))
+inspirations.add_url_rule('/inspirations/<int:page>/', view_func=ListInspirations.as_view('listpage'))
 inspirations.add_url_rule('/inspirations/new/', view_func=NewInspiration.as_view('new'))
 inspirations.add_url_rule('/inspirations/create/', defaults={'phrase': None}, view_func=NewInspiration.as_view('create'))
 inspirations.add_url_rule('/inspirations/<phrase>/', view_func=ShowInspiration.as_view('show'))

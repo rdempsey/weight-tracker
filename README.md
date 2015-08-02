@@ -34,7 +34,7 @@ At a minimum, fill in the details for your MongoDB installation in the MongoDB s
 
 In the root directory, run the following command (on Mac or Linux) to make the manage.py file executable
   
-    chmod +x ./manage.py
+    chmod a+x ./manage.py
 
 Run the index.py file to start Weight Tracker
 
@@ -50,8 +50,8 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 
 ### The ToDo List
 
-* Add pagination to the measurement history
 * Add supplement intake tracking
 * Add a food journal
 * Add charty goodness to the homepage to show progress
+* Add a randomly pulled inspiration to the homepage
 * Add a predictive model for weight
