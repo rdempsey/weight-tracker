@@ -2,11 +2,13 @@
 from flask import Flask, render_template
 from flask.ext.mongoengine import MongoEngine, MongoEngineSessionInterface
 import configparser
+from .momentjs import momentjs
 
 app = Flask(__name__)
 # Security
 WTF_CSRF_ENABLED = True
 app.config['SECRET_KEY'] = '2bN9UUaBpcjrxR'
+app.jinja_env.globals['momentjs'] = momentjs
 
 # App Config
 config = configparser.ConfigParser()
@@ -26,6 +28,8 @@ def register_blueprints(app):
     app.register_blueprint(measurements)
     from weighttracker.views.inspiration_views import inspirations
     app.register_blueprint(inspirations)
+    from weighttracker.views.foodjournal_views import foodjournals
+    app.register_blueprint(foodjournals)
 
 register_blueprints(app)
 
