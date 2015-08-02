@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+<h1>{{ foodjournal.date }}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-8">
+    <table class="table table-striped table-hover ">
+      <tbody>
+        <tr>
+          <td>Eating Time</td>
+          <td>{{ foodjournal.eating_time }}</td>
+        </tr>
+        <tr>
+          <td>Location At The Time</td>
+          <td>{{ foodjournal.location_at_time }}</td>
+        </tr>
+        <tr>
+          <td>What Was Eaten</td>
+          <td>{{ foodjournal.what_was_eaten }}</td>
+        </tr>
+        <tr>
+          <td>What Was Drank</td>
+          <td>{{ foodjournal.what_was_drank }}</td>
+        </tr>
+        <tr>
+          <td>Mood Before Eating</td>
+          <td>{{ foodjournal.mood_before }}</td>
+        </tr>
+        <tr>
+          <td>Mood After Eating</td>
+          <td>{{ foodjournal.mood_after }}</td>
+        </tr>
+        <tr>
+          <td>Created On</td>
+          <td>{{ momentjs(foodjournal.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+        </tr>
+        <tr>
+          <td>Updated On</td>
+          <td>{{ momentjs(foodjournal.updated_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-8">
+    <div class="bs-component">
+      <div class="well text-right">
+        <a href="{{ url_for('foodjournals.list') }}" class="btn btn-default">Back</a> 
+        <a href="{{ url_for('foodjournals.edit', eating_time=foodjournal.eating_time) }}" class="btn btn-primary">Edit</a> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
