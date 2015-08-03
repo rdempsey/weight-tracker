@@ -19,21 +19,17 @@
   <tr>
     <th>Eating Time</th>
     <th>Location</th>
-    <th>Level of Mood Before</th>
-    <th>Mood Before</th>
-    <th>Mood After</th>
-    <th>Level of Mood After</th>
+    <th>Mood Before Eating</th>
+    <th>Mood After Eating</th>
     <th>&nbsp;</th>
   </tr>
   {% for foodjournal in foodjournals.items %}
   <tr>
-    <td><a href="{{ url_for('foodjournals.show', eating_time=foodjournal.eating_time) }}">{{ foodjournal.eating_time }}</a></td>
+    <td><a href="{{ url_for('foodjournals.show', id=foodjournal.id) }}">{{ foodjournal.eating_time }}</a></td>
     <td>{{ foodjournal.where_i_ate }}</td>
-    <td>{{ foodjournal.level_of_mood_before_food }}</td>
-    <td>{{ foodjournal.mood_before_food }}</td>
-    <td>{{ foodjournal.level_of_mood_after_food }}</td>
-    <td>{{ foodjournal.mood_after_food }}</td>
-    <td><a href="{{ url_for('foodjournals.edit', eating_time=foodjournal.eating_time) }}">Edit</a></td>
+    <td>{{ foodjournal.level_of_mood_before_food }} {{ foodjournal.mood_before_food }}</td>
+    <td>{{ foodjournal.level_of_mood_after_food }} {{ foodjournal.mood_after_food }}</td>
+    <td><a href="{{ url_for('foodjournals.edit', id=foodjournal.id) }}">Edit</a></td>
   </tr>
   {% endfor %}
 </table>

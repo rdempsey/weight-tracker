@@ -15,25 +15,25 @@ class ListFoodjournals(MethodView):
 
 class ShowFoodjournal(MethodView):
 
-  def get(self, eating_time):
-    foodjournal = Foodjournal.objects.get_or_404(eating_time=eating_time )
+  def get(self, id):
+    foodjournal = Foodjournal.objects.get_or_404(id=id )
     return render_template('foodjournals/show.html', foodjournal=foodjournal)
 
 
 class EditFoodjournal(MethodView):
 
-  def get(self, eating_time):
-    foodjournal = Foodjournal.objects.get_or_404(eating_time=eating_time )
+  def get(self, id):
+    foodjournal = Foodjournal.objects.get_or_404(id=id )
     return render_template('foodjournals/edit.html', foodjournal=foodjournal)
 
 
 class NewFoodjournal(MethodView):
 
-  def get_context(self, eating_time=None):
+  def get_context(self, id=None):
     form_cls = model_form(Foodjournal, exclude=('created_at', 'updated_at'))
 
-    if eating_time:
-      foodjournal = Foodjournal.objects.get_or_404(eating_time=eating_time)
+    if id:
+      foodjournal = Foodjournal.objects.get_or_404(id=id)
       if request.method == 'POST':
         form = form_cls(request.form, inital=foodjournal._data)
       else:
@@ -45,21 +45,19 @@ class NewFoodjournal(MethodView):
     context = {
             "foodjournal": foodjournal,
             "form": form,
-            "create": eating_time is None
+            "create": id is None
     }
 
     return context
 
 
-  def get(self, eating_time=None):
-    context = self.get_context(eating_time)
+  def get(self, id=None):
+    context = self.get_context(id)
     return render_template('foodjournals/new.html', **context)
 
-  def post(self, eating_time=None):
-    print("\n\n {} \n\n".format(request.values))
-    context = self.get_context(eating_time)
+  def post(self, id=None):
+    context = self.get_context(id)
     form = context.get('form')
-    # print("\n\n{}\n\n".format(form))
 
     if form.validate():
       foodjournal = context.get('foodjournal')
@@ -76,5 +74,5 @@ foodjournals.add_url_rule('/foodjournals/', view_func=ListFoodjournals.as_view('
 foodjournals.add_url_rule('/foodjournals/<int:page>/', view_func=ListFoodjournals.as_view('listpage'))
 foodjournals.add_url_rule('/foodjournals/new/', view_func=NewFoodjournal.as_view('new'))
 foodjournals.add_url_rule('/foodjournals/create/', defaults={'eating_time': None}, view_func=NewFoodjournal.as_view('create'))
-foodjournals.add_url_rule('/foodjournals/<eating_time>/', view_func=ShowFoodjournal.as_view('show'))
-foodjournals.add_url_rule('/foodjournals/edit/<eating_time>/', view_func=NewFoodjournal.as_view('edit'))
+foodjournals.add_url_rule('/foodjournals/<id>/', view_func=ShowFoodjournal.as_view('show'))
+foodjournals.add_url_rule('/foodjournals/edit/<id>/', view_func=NewFoodjournal.as_view('edit'))
