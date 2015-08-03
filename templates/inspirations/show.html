@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_header %}
-<h1>Inspiration</h1>
+<h1>Inspiration from: {{ momentjs(inspiration.created_at).format('MMMM Do[,] YYYY') }}</h1>
 {% endblock %}
 
 {% block content %}

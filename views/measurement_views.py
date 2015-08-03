@@ -24,7 +24,8 @@ class EditMeasurement(MethodView):
 
   def get(self, id):
     measurement = Measurement.objects.get_or_404(id=id )
-    return render_template('measurements/edit.html', measurement=measurement)
+    header_text = "Edit This Measurement"
+    return render_template('measurements/edit.html', measurement=measurement, header_text=header_text)
 
 
 class NewMeasurement(MethodView):
@@ -34,17 +35,20 @@ class NewMeasurement(MethodView):
 
     if id:
       measurement = Measurement.objects.get_or_404(id=id)
+      header_text = "Edit This Measurement"
       if request.method == 'POST':
         form = form_cls(request.form, initial=measurement._data)
       else:
         form = form_cls(obj=measurement)
     else:
       measurement = Measurement()
+      header_text = "Add a New Measurement"
       form = form_cls(request.form)
 
     context = {
             "measurement": measurement,
             "form": form,
+            "header_text": header_text,
             "create": id is None
     }
 

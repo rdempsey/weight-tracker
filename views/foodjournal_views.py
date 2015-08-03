@@ -24,7 +24,8 @@ class EditFoodjournal(MethodView):
 
   def get(self, id):
     foodjournal = Foodjournal.objects.get_or_404(id=id )
-    return render_template('foodjournals/edit.html', foodjournal=foodjournal)
+    header_text = "Edit This Food Journal Entry"
+    return render_template('foodjournals/edit.html', foodjournal=foodjournal, header_text=header_text)
 
 
 class NewFoodjournal(MethodView):
@@ -34,17 +35,20 @@ class NewFoodjournal(MethodView):
 
     if id:
       foodjournal = Foodjournal.objects.get_or_404(id=id)
+      header_text = "Edit This Food Journal Entry"
       if request.method == 'POST':
         form = form_cls(request.form, inital=foodjournal._data)
       else:
         form = form_cls(obj=foodjournal)
     else:
       foodjournal = Foodjournal()
+      header_text = "Add a New Food Journal Entry"
       form = form_cls(request.form)
 
     context = {
             "foodjournal": foodjournal,
             "form": form,
+            "header_text": header_text,
             "create": id is None
     }
 

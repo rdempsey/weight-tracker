@@ -24,7 +24,8 @@ class EditInspiration(MethodView):
 
   def get(self, id):
     inspiration = Inspiration.objects.get_or_404(id=id )
-    return render_template('inspirations/edit.html', inspiration=inspiration)
+    header_text = "Edit This Inspiration"
+    return render_template('inspirations/edit.html', inspiration=inspiration, header_text=header_text)
 
 
 class NewInspiration(MethodView):
@@ -34,17 +35,20 @@ class NewInspiration(MethodView):
 
     if id:
       inspiration = Inspiration.objects.get_or_404(id=id)
+      header_text = "Edit This Inspiration"
       if request.method == 'POST':
         form = form_cls(request.form, inital=inspiration._data)
       else:
         form = form_cls(obj=inspiration)
     else:
       inspiration = Inspiration()
+      header_text = "Add a New Inspiration"
       form = form_cls(request.form)
 
     context = {
             "inspiration": inspiration,
             "form": form,
+            "header_text": header_text,
             "create": id is None
     }
 
