@@ -15,25 +15,25 @@ class ListInspirations(MethodView):
 
 class ShowInspiration(MethodView):
 
-  def get(self, phrase):
-    inspiration = Inspiration.objects.get_or_404(phrase=phrase )
+  def get(self, id):
+    inspiration = Inspiration.objects.get_or_404(id=id )
     return render_template('inspirations/show.html', inspiration=inspiration)
 
 
 class EditInspiration(MethodView):
 
-  def get(self, phrase):
-    inspiration = Inspiration.objects.get_or_404(phrase=phrase )
+  def get(self, id):
+    inspiration = Inspiration.objects.get_or_404(id=id )
     return render_template('inspirations/edit.html', inspiration=inspiration)
 
 
 class NewInspiration(MethodView):
 
-  def get_context(self, phrase=None):
+  def get_context(self, id=None):
     form_cls = model_form(Inspiration, exclude=('created_at', 'updated_at'))
 
-    if phrase:
-      inspiration = Inspiration.objects.get_or_404(phrase=phrase)
+    if id:
+      inspiration = Inspiration.objects.get_or_404(id=id)
       if request.method == 'POST':
         form = form_cls(request.form, inital=inspiration._data)
       else:
@@ -45,18 +45,18 @@ class NewInspiration(MethodView):
     context = {
             "inspiration": inspiration,
             "form": form,
-            "create": phrase is None
+            "create": id is None
     }
 
     return context
 
 
-  def get(self, phrase=None):
-    context = self.get_context(phrase)
+  def get(self, id=None):
+    context = self.get_context(id)
     return render_template('inspirations/new.html', **context)
 
-  def post(self, phrase=None):
-    context = self.get_context(phrase)
+  def post(self, id=None):
+    context = self.get_context(id)
     form = context.get('form')
 
     if form.validate():
@@ -73,6 +73,6 @@ class NewInspiration(MethodView):
 inspirations.add_url_rule('/inspirations/', view_func=ListInspirations.as_view('list'))
 inspirations.add_url_rule('/inspirations/<int:page>/', view_func=ListInspirations.as_view('listpage'))
 inspirations.add_url_rule('/inspirations/new/', view_func=NewInspiration.as_view('new'))
-inspirations.add_url_rule('/inspirations/create/', defaults={'phrase': None}, view_func=NewInspiration.as_view('create'))
-inspirations.add_url_rule('/inspirations/<phrase>/', view_func=ShowInspiration.as_view('show'))
-inspirations.add_url_rule('/inspirations/edit/<phrase>/', view_func=NewInspiration.as_view('edit'))
+inspirations.add_url_rule('/inspirations/create/', defaults={'id': None}, view_func=NewInspiration.as_view('create'))
+inspirations.add_url_rule('/inspirations/<id>/', view_func=ShowInspiration.as_view('show'))
+inspirations.add_url_rule('/inspirations/edit/<id>/', view_func=NewInspiration.as_view('edit'))
