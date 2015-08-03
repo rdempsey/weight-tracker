@@ -56,10 +56,12 @@ class NewFoodjournal(MethodView):
     return render_template('foodjournals/new.html', **context)
 
   def post(self, eating_time=None):
+    print("\n\n {} \n\n".format(request.values))
     context = self.get_context(eating_time)
     form = context.get('form')
+    # print("\n\n{}\n\n".format(form))
 
-    if form.valieating_time():
+    if form.validate():
       foodjournal = context.get('foodjournal')
       form.populate_obj(foodjournal)
       foodjournal.save()

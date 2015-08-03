@@ -1,8 +1,7 @@
-{% import "_forms.html" as forms %}
 {% extends "base.html" %}
 
 {% block page_header %}
-<h1>Add A New Measurement</h1>
+<h1>Add A Measurement</h1>
 {% endblock %}
 
 {% block content %}
@@ -11,7 +10,40 @@
     <div class="bs-component">
       <form action="." method="post" class="form-horizontal">
         {{ form.hidden_tag() }}
-        {{ forms.render(form) }}
+        <div class="form-group">
+          <label class="control-label">Date</label>
+          <div class='input-group' id='datetimepicker1'>
+            {{ form.date(class='form-control') }}
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+        <div class="form-group">
+          <label class="control-label">Weight</label>
+          <p>{{ form.weight(class='form-control') }}</p>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Body Fat Percentage</label>
+          <p>{{ form.body_fat_percentage(class='form-control') }}</p>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Suprailiac</label>
+          <p>{{ form.suprailiac(class='form-control') }}</p>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Abdominal</label>
+          <p>{{ form.abdominal(class='form-control') }}</p>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Thigh</label>
+          <p>{{ form.thigh(class='form-control') }}</p>
+        </div>
         <div class="form-group text-right">
           <div class="col-lg-10 col-lg-offset-2">
             <a href="{{ url_for('measurements.list') }}" class="btn btn-default">Cancel</a>
