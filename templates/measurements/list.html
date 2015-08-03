@@ -27,13 +27,13 @@
   </tr>
   {% for measurement in measurements.items %}
   <tr>
-    <td><a href="{{ url_for('measurements.show', date=measurement.date) }}">{{ measurement.date }}</a></td>
+    <td><a href="{{ url_for('measurements.show', id=measurement.id) }}">{{ measurement.date }}</a></td>
     <td>{{measurement.weight}}</td>
     <td>{{measurement.body_fat_percentage}}</td>
     <td>{{measurement.suprailiac}}</td>
     <td>{{measurement.abdominal}}</td>
     <td>{{measurement.thigh}}</td>
-    <td><a href="{{ url_for('measurements.edit', date=measurement.date) }}">Edit</a></td>
+    <td><a href="{{ url_for('measurements.edit', id=measurement.id) }}">Edit</a></td>
   </tr>
   {% endfor %}
 </table>
