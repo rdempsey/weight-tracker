@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_header %}
-<h1>Inspiration</h1>
+<h1>Inspiration from: {{ momentjs(inspiration.created_at).format('MMMM Do[,] YYYY') }}</h1>
 {% endblock %}
 
 {% block content %}
@@ -11,15 +11,15 @@
       <tbody>
         <tr>
           <td>Phrase</td>
-          <td>{{ inspiration.weight }}</td>
+          <td>{{ inspiration.phrase }}</td>
         </tr>
         <tr>
           <td>Created On</td>
-          <td>{{ inspiration.created_at.strftime('%H:%M %Y-%m-%d') }}</td>
+          <td>{{ momentjs(inspiration.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
         </tr>
         <tr>
           <td>Updated On</td>
-          <td>{{ inspiration.updated_at.strftime('%H:%M %Y-%m-%d') }}</td>
+          <td>{{ momentjs(inspiration.updated_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
         </tr>
       </tbody>
     </table>
@@ -30,7 +30,7 @@
     <div class="bs-component">
       <div class="well text-right">
         <a href="{{ url_for('inspirations.list') }}" class="btn btn-default">Back</a> 
-        <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">Add an Inspiration</a> 
+        <a href="{{ url_for('inspirations.edit', id=inspiration.id) }}" class="btn btn-primary">Edit</a> 
       </div>
     </div>
   </div>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block page_header %}
+<div class="col-lg-8">
+  <div class="bs-component">
+    <h1>My Food Journal</h1>
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="bs-component text-right">
+    <br />
+    <a href="{{ url_for('foodjournals.new') }}" class="btn btn-primary">New Food Journal Entry</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<table class="table table-striped table-hover">
+  <tr>
+    <th>Eating Time</th>
+    <th>Location</th>
+    <th>Mood Before Eating</th>
+    <th>Mood After Eating</th>
+    <th>&nbsp;</th>
+  </tr>
+  {% for foodjournal in foodjournals.items %}
+  <tr>
+    <td><a href="{{ url_for('foodjournals.show', id=foodjournal.id) }}">{{ foodjournal.eating_time }}</a></td>
+    <td>{{ foodjournal.where_i_ate }}</td>
+    <td>{{ foodjournal.level_of_mood_before_food }} {{ foodjournal.mood_before_food }}</td>
+    <td>{{ foodjournal.level_of_mood_after_food }} {{ foodjournal.mood_after_food }}</td>
+    <td><a href="{{ url_for('foodjournals.edit', id=foodjournal.id) }}">Edit</a></td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="bs-component">
+      <div class="well">
+        {%- for page in foodjournals.iter_pages() %}
+          {% if page %}
+            {% if page != foodjournals.page %}
+                <a href="{{ url_for('foodjournals.listpage', page=page) }}">{{ page }}</a>
+            {% else %}
+                <strong>{{ page }}</strong>
+            {% endif %}
+          {% else %}
+            <span class=ellipsis>…</span>
+          {% endif %}
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

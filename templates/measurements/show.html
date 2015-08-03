@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
-
 {% block page_header %}
-<h1>{{ measurement.date }}</h1>
+<h1>Measurement from: {{ measurement.date }}</h1>
 {% endblock %}
 
 {% block content %}
@@ -32,11 +31,11 @@
         </tr>
         <tr>
           <td>Created On</td>
-          <td>{{ measurement.created_at.strftime('%H:%M %Y-%m-%d') }}</td>
+          <td>{{ momentjs(measurement.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
         </tr>
         <tr>
           <td>Updated On</td>
-          <td>{{ measurement.updated_at.strftime('%H:%M %Y-%m-%d') }}</td>
+          <td>{{ momentjs(measurement.updated_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
         </tr>
       </tbody>
     </table>
@@ -47,7 +46,7 @@
     <div class="bs-component">
       <div class="well text-right">
         <a href="{{ url_for('measurements.list') }}" class="btn btn-default">Back</a> 
-        <a href="{{ url_for('measurements.new') }}" class="btn btn-primary">Add a Measurement</a> 
+        <a href="{{ url_for('measurements.edit', id=measurement.id) }}" class="btn btn-primary">Edit</a> 
       </div>
     </div>
   </div>

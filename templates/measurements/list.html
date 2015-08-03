@@ -8,7 +8,8 @@
 </div>
 <div class="col-lg-4">
   <div class="bs-component text-right">
-    <a href="{{ url_for('measurements.new') }}" class="btn btn-primary">Add a Measurement</a> 
+    <br />
+    <a href="{{ url_for('measurements.new') }}" class="btn btn-primary">New Measurement</a> 
   </div>
 </div>
 {% endblock %}
@@ -26,13 +27,13 @@
   </tr>
   {% for measurement in measurements.items %}
   <tr>
-    <td><a href="{{ url_for('measurements.show', date=measurement.date) }}">{{ measurement.date }}</a></td>
+    <td><a href="{{ url_for('measurements.show', id=measurement.id) }}">{{ measurement.date }}</a></td>
     <td>{{measurement.weight}}</td>
     <td>{{measurement.body_fat_percentage}}</td>
     <td>{{measurement.suprailiac}}</td>
     <td>{{measurement.abdominal}}</td>
     <td>{{measurement.thigh}}</td>
-    <td><a href="{{ url_for('measurements.edit', date=measurement.date) }}">Edit</a></td>
+    <td><a href="{{ url_for('measurements.edit', id=measurement.id) }}">Edit</a></td>
   </tr>
   {% endfor %}
 </table>

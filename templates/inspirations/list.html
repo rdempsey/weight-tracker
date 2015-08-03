@@ -8,7 +8,8 @@
 </div>
 <div class="col-lg-4">
   <div class="bs-component text-right">
-    <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">Add an Inspiration</a> 
+    <br />
+    <a href="{{ url_for('inspirations.new') }}" class="btn btn-primary">New Inspiration</a> 
   </div>
 </div>
 {% endblock %}
@@ -22,9 +23,9 @@
   </tr>
   {% for inspiration in inspirations.items %}
   <tr>
-    <td><a href="{{ url_for('inspirations.show', phrase=inspiration.phrase) }}">{{ inspiration.phrase }}</a></td>
-    <td>{{inspiration.created_at}}</td>
-    <td><a href="{{ url_for('inspirations.edit', phrase=inspiration.phrase) }}">Edit</a></td>
+    <td><a href="{{ url_for('inspirations.show', id=inspiration.id) }}">{{ inspiration.phrase }}</a></td>
+    <td>{{ momentjs(inspiration.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
+    <td><a href="{{ url_for('inspirations.edit', id=inspiration.id) }}">Edit</a></td>
   </tr>
   {% endfor %}
 </table>

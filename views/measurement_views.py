@@ -15,48 +15,52 @@ class ListMeasurements(MethodView):
 
 class ShowMeasurement(MethodView):
 
-  def get(self, date):
-    measurement = Measurement.objects.get_or_404(date=date )
+  def get(self, id):
+    measurement = Measurement.objects.get_or_404(id=id )
     return render_template('measurements/show.html', measurement=measurement)
 
 
 class EditMeasurement(MethodView):
 
-  def get(self, date):
-    measurement = Measurement.objects.get_or_404(date=date )
-    return render_template('measurements/edit.html', measurement=measurement)
+  def get(self, id):
+    measurement = Measurement.objects.get_or_404(id=id )
+    header_text = "Edit This Measurement"
+    return render_template('measurements/edit.html', measurement=measurement, header_text=header_text)
 
 
 class NewMeasurement(MethodView):
 
-  def get_context(self, date=None):
+  def get_context(self, id=None):
     form_cls = model_form(Measurement, exclude=('created_at', 'updated_at'))
 
-    if date:
-      measurement = Measurement.objects.get_or_404(date=date)
+    if id:
+      measurement = Measurement.objects.get_or_404(id=id)
+      header_text = "Edit This Measurement"
       if request.method == 'POST':
         form = form_cls(request.form, initial=measurement._data)
       else:
         form = form_cls(obj=measurement)
     else:
       measurement = Measurement()
+      header_text = "Add a New Measurement"
       form = form_cls(request.form)
 
     context = {
             "measurement": measurement,
             "form": form,
-            "create": date is None
+            "header_text": header_text,
+            "create": id is None
     }
 
     return context
 
 
-  def get(self, date=None):
-    context = self.get_context(date)
+  def get(self, id=None):
+    context = self.get_context(id)
     return render_template('measurements/new.html', **context)
 
-  def post(self, date=None):
-    context = self.get_context(date)
+  def post(self, id=None):
+    context = self.get_context(id)
     form = context.get('form')
 
     if form.validate():
@@ -73,6 +77,6 @@ class NewMeasurement(MethodView):
 measurements.add_url_rule('/measurements/', view_func=ListMeasurements.as_view('list'))
 measurements.add_url_rule('/measurements/<int:page>/', view_func=ListMeasurements.as_view('listpage'))
 measurements.add_url_rule('/measurements/new/', view_func=NewMeasurement.as_view('new'))
-measurements.add_url_rule('/measurements/create/', defaults={'date': None}, view_func=NewMeasurement.as_view('create'))
-measurements.add_url_rule('/measurements/<date>/', view_func=ShowMeasurement.as_view('show'))
-measurements.add_url_rule('/measurements/edit/<date>/', view_func=NewMeasurement.as_view('edit'))
+measurements.add_url_rule('/measurements/create/', defaults={'id': None}, view_func=NewMeasurement.as_view('create'))
+measurements.add_url_rule('/measurements/<id>/', view_func=ShowMeasurement.as_view('show'))
+measurements.add_url_rule('/measurements/edit/<id>/', view_func=NewMeasurement.as_view('edit'))
