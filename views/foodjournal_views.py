@@ -2,6 +2,7 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from weighttracker.models.foodjournal import Foodjournal
+import datetime
 
 foodjournals = Blueprint('foodjournals', __name__, template_folder='templates')
 
@@ -65,6 +66,8 @@ class NewFoodjournal(MethodView):
 
     if form.validate():
       foodjournal = context.get('foodjournal')
+      # Convert the eating_time into a datetime for saving
+      foodjournal['eating_time'] = datetime.datetime.strptime(foodjournal['eating_time'], "%m/%d/%Y %H:%M %p")
       form.populate_obj(foodjournal)
       foodjournal.save()
 

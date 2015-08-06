@@ -69,7 +69,7 @@ class Foodjournal(db.Document):
                   ('Worn Out','Worn Out'),
                   ('Worthless','Worthless'))
 
-  eating_time = db.StringField(required=True, unique=True, max_length=100)
+  eating_time = db.DateTimeField(required=True, unique=True)
   where_i_ate = db.StringField()
   what_was_eaten = db.StringField()
   what_was_drank = db.StringField()
