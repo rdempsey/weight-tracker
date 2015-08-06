@@ -51,7 +51,12 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 
 ### The ToDo List
 
-* Add supplement intake tracking
+* Add an exercise tracker
+* Add tiny habits (track the tiny habits you want to implement in your life)
+* Add supplement intake tracking; currently this is part of food intake
 * Add charty goodness to the homepage to show progress
+  * How much time between meals per day, as a trend
+  * Show all of the food and beverage consumed in a single day
 * Add a randomly pulled inspiration to the homepage
 * Add a predictive model for weight
+* Add a resource section
