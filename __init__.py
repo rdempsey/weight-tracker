@@ -14,8 +14,8 @@ app.jinja_env.globals['momentjs'] = momentjs
 config = configparser.ConfigParser()
 config.read('config/config.ini')
 
-app.config['MONGODB_DB_SETTINGS'] = {
-  'name': config['MongoDB']['db_name'],
+app.config['MONGODB_SETTINGS'] = {
+  'db': config['MongoDB']['db_name'],
   'host': config['MongoDB']['host'],
   'port': int(config['MongoDB']['port']),
   'username': config['MongoDB']['username'],
