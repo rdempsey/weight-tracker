@@ -9,7 +9,7 @@ foodjournals = Blueprint('foodjournals', __name__, template_folder='templates')
 class ListFoodjournals(MethodView):
 
   def get(self, page=1):
-    foodjournals = Foodjournal.objects.paginate(page, per_page=10)
+    foodjournals = Foodjournal.objects.order_by('-eating_time').paginate(page, per_page=10)
     return render_template('foodjournals/list.html', foodjournals=foodjournals)
 
 

@@ -9,7 +9,7 @@ measurements = Blueprint('measurements', __name__, template_folder='templates')
 class ListMeasurements(MethodView):
 
   def get(self, page=1):
-    measurements = Measurement.objects.paginate(page, per_page=10)
+    measurements = Measurement.objects.order_by('-date').paginate(page, per_page=10)
     return render_template('measurements/list.html', measurements=measurements)
 
 
