@@ -69,7 +69,7 @@ class Foodjournal(db.Document):
                   ('Worn Out','Worn Out'),
                   ('Worthless','Worthless'))
 
-  eating_time = db.DateTimeField(required=True, unique=True)
+  eating_time = db.StringField(required=True, unique=True, max_length=100)
   where_i_ate = db.StringField()
   what_was_eaten = db.StringField()
   what_was_drank = db.StringField()
@@ -77,5 +77,6 @@ class Foodjournal(db.Document):
   mood_before_food = db.StringField(choices=mood_choices)
   level_of_mood_after_food = db.StringField(choices=mood_levels)
   mood_after_food = db.StringField(choices=mood_choices)
-  created_at = db.DateTimeField(default=datetime.now, required=True)
-  updated_at = db.DateTimeField(default=datetime.now, required=True)
+  eating_time_parsed = db.DateTimeField()
+  created_at = db.DateTimeField(default=datetime.now(), required=True)
+  updated_at = db.DateTimeField(default=datetime.now(), required=True)

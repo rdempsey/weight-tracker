@@ -2,7 +2,9 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from weighttracker.models.foodjournal import Foodjournal
-import datetime
+import parsedatetime
+from datetime import datetime
+from time import mktime
 
 foodjournals = Blueprint('foodjournals', __name__, template_folder='templates')
 
@@ -10,7 +12,7 @@ foodjournals = Blueprint('foodjournals', __name__, template_folder='templates')
 class ListFoodjournals(MethodView):
 
   def get(self, page=1):
-    foodjournals = Foodjournal.objects.order_by('-eating_time').paginate(page, per_page=10)
+    foodjournals = Foodjournal.objects.order_by('-eating_time_parsed').paginate(page, per_page=10)
     return render_template('foodjournals/list.html', foodjournals=foodjournals)
 
 
@@ -66,9 +68,15 @@ class NewFoodjournal(MethodView):
 
     if form.validate():
       foodjournal = context.get('foodjournal')
-      # Convert the eating_time into a datetime for saving
-      foodjournal['eating_time'] = datetime.datetime.strptime(foodjournal['eating_time'], "%m/%d/%Y %H:%M %p")
       form.populate_obj(foodjournal)
+
+      # Add the eating_time_parsed value, or update it
+      cal = parsedatetime.Calendar()
+      time_struct, parse_status = cal.parse(foodjournal['eating_time'])
+      foodjournal['eating_time_parsed'] = datetime.fromtimestamp(mktime(time_struct))
+      foodjournal['updated_at'] = datetime.now()
+
+      # Save the record
       foodjournal.save()
 
       return redirect(url_for('foodjournals.list'))
