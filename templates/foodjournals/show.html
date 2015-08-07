@@ -33,14 +33,6 @@
           <td>Mood After Eating</td>
           <td>{{ foodjournal.level_of_mood_after_food }} {{ foodjournal.mood_after_food }}</td>
         </tr>
-        <tr>
-          <td>Created On</td>
-          <td>{{ momentjs(foodjournal.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
-        </tr>
-        <tr>
-          <td>Updated On</td>
-          <td>{{ momentjs(foodjournal.updated_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
-        </tr>
       </tbody>
     </table>
   </div>
