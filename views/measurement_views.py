@@ -72,9 +72,9 @@ class NewMeasurement(MethodView):
 
       # Add the measurement_time value, or update it
       cal = parsedatetime.Calendar()
-      time_struct, parse_status = cal.parse(foodjournal['date'])
-      foodjournal['measurement_time'] = datetime.fromtimestamp(mktime(time_struct))
-      foodjournal['updated_at'] = datetime.now()
+      time_struct, parse_status = cal.parse(measurement['date'])
+      measurement['measurement_time'] = datetime.fromtimestamp(mktime(time_struct))
+      measurement['updated_at'] = datetime.now()
 
       measurement.save()
 
