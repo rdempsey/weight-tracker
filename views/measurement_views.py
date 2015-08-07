@@ -2,6 +2,9 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from weighttracker.models.measurement import Measurement
+import parsedatetime
+from datetime import datetime
+from time import mktime
 
 measurements = Blueprint('measurements', __name__, template_folder='templates')
 
@@ -9,7 +12,7 @@ measurements = Blueprint('measurements', __name__, template_folder='templates')
 class ListMeasurements(MethodView):
 
   def get(self, page=1):
-    measurements = Measurement.objects.order_by('-date').paginate(page, per_page=10)
+    measurements = Measurement.objects.order_by('-measurement_time').paginate(page, per_page=10)
     return render_template('measurements/list.html', measurements=measurements)
 
 
@@ -66,6 +69,13 @@ class NewMeasurement(MethodView):
     if form.validate():
       measurement = context.get('measurement')
       form.populate_obj(measurement)
+
+      # Add the measurement_time value, or update it
+      cal = parsedatetime.Calendar()
+      time_struct, parse_status = cal.parse(foodjournal['date'])
+      foodjournal['measurement_time'] = datetime.fromtimestamp(mktime(time_struct))
+      foodjournal['updated_at'] = datetime.now()
+
       measurement.save()
 
       return redirect(url_for('measurements.list'))

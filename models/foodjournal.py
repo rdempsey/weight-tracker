@@ -77,5 +77,6 @@ class Foodjournal(db.Document):
   mood_before_food = db.StringField(choices=mood_choices)
   level_of_mood_after_food = db.StringField(choices=mood_levels)
   mood_after_food = db.StringField(choices=mood_choices)
-  created_at = db.DateTimeField(default=datetime.now, required=True)
-  updated_at = db.DateTimeField(default=datetime.now, required=True)
+  eating_time_parsed = db.DateTimeField()
+  created_at = db.DateTimeField(default=datetime.now(), required=True)
+  updated_at = db.DateTimeField(default=datetime.now(), required=True)

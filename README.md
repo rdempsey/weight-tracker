@@ -14,6 +14,7 @@ I got sick of having to track all my food down to the calorie when I can predict
 * [WTForms](https://github.com/wtforms/wtforms) >= 2.0.2
 * [mongoengine](http://mongoengine.org/) >= 0.10.0
 * [flask-mongoengine](https://github.com/MongoEngine/flask-mongoengine) >= 0.7.1
+* [parsedatetime](https://github.com/bear/parsedatetime) >= 1.5
 
 
 ### Running Weight Tracker

@@ -9,5 +9,6 @@ class Measurement(db.Document):
   suprailiac = db.DecimalField()
   abdominal = db.DecimalField()
   thigh = db.DecimalField()
+  measurement_time = db.DateTimeField(default=datetime.now, required=True)
   created_at = db.DateTimeField(default=datetime.now, required=True)
   updated_at = db.DateTimeField(default=datetime.now, required=True)
