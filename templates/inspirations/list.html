@@ -18,13 +18,11 @@
 <table class="table table-striped table-hover">
   <tr>
     <th>Phrase</th>
-    <th>Created On</th>
     <th>&nbsp;</th>
   </tr>
   {% for inspiration in inspirations.items %}
   <tr>
     <td><a href="{{ url_for('inspirations.show', id=inspiration.id) }}">{{ inspiration.phrase }}</a></td>
-    <td>{{ momentjs(inspiration.created_at).format('MMMM Do YYYY, h:mm:ss a') }}</td>
     <td><a href="{{ url_for('inspirations.edit', id=inspiration.id) }}">Edit</a></td>
   </tr>
   {% endfor %}

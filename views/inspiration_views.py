@@ -2,6 +2,7 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from flask.ext.mongoengine.wtf import model_form
 from weighttracker.models.inspiration import Inspiration
+from datetime import datetime
 
 inspirations = Blueprint('inspirations', __name__, template_folder='templates')
 
@@ -66,6 +67,10 @@ class NewInspiration(MethodView):
     if form.validate():
       inspiration = context.get('inspiration')
       form.populate_obj(inspiration)
+
+      # Update the updated_at field
+      inspiration['updated_at'] = datetime.now()
+
       inspiration.save()
 
       return redirect(url_for('inspirations.list'))
