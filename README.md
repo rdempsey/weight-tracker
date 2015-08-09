@@ -52,7 +52,6 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 
 ### The ToDo List
 
-* Add an exercise tracker
 * Add tiny habits (track the tiny habits you want to implement in your life)
 * Add supplement intake tracking; currently this is part of food intake
 * Add charty goodness to the homepage to show progress
