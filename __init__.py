@@ -31,6 +31,8 @@ def register_blueprints(app):
     app.register_blueprint(inspirations)
     from weighttracker.views.foodjournal_views import foodjournals
     app.register_blueprint(foodjournals)
+    from weighttracker.views.exercisejournal_views import exercisejournals
+    app.register_blueprint(exercisejournals)
 
 register_blueprints(app)
 

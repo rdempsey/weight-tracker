@@ -4,13 +4,15 @@ from weighttracker import db
 
 class Foodjournal(db.Document):
 
-  mood_levels = (('Not at all','Not at all'),
+  mood_levels = (('---','---'),
+                 ('Not at all','Not at all'),
                  ('A little','A little'),
                  ('Moderately','Moderately'),
                  ('Quite a Lot','Quite a Lot'),
                  ('Extremely','Extremely'))
 
-  mood_choices = (('Active','Active'),
+  mood_choices = (('---','---'),
+                  ('Active','Active'),
                   ('Alert','Alert'),
                   ('Anger','Anger'),
                   ('Annoyed','Annoyed'),
