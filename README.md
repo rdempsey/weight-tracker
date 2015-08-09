@@ -26,6 +26,7 @@ Install all of the required Python libraries.
     pip install WTForms
     pip install mongoengine
     pip install flask_mongoengine
+    pip install parsedatetime
 
 Download, install and then run [MongoDB](https://www.mongodb.org/)
 
