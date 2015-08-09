@@ -49,6 +49,7 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 * Track weight, body fat percentage, and three body measurements
 * Add and manage inspirational phrases
 * Track what you eat and drink, along with your mood at the time
+* Track your exercise
 
 
 ### The ToDo List
