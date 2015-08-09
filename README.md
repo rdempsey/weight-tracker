@@ -61,3 +61,4 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 * Add a randomly pulled inspiration to the homepage
 * Add a predictive model for weight
 * Add a resource section
+* Add satiety to the food journal: level of hunger before/after eating
