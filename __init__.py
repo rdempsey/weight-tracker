@@ -7,7 +7,6 @@ from .momentjs import momentjs
 app = Flask(__name__)
 # Security
 WTF_CSRF_ENABLED = True
-app.config['SECRET_KEY'] = '2bN9UUaBpcjrxR'
 app.jinja_env.globals['momentjs'] = momentjs
 
 # App Config
@@ -20,6 +19,8 @@ app.config['MONGODB_SETTINGS'] = {
   'port': int(config['MongoDB']['port']),
   'username': config['MongoDB']['username'],
   'password': config['MongoDB']['password']}
+
+app.config['SECRET_KEY'] = config['Default']['secret_key']
 
 db = MongoEngine(app)
 
