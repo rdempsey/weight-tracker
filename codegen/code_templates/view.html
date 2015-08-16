@@ -11,76 +11,74 @@ from time import mktime
 
 class List{{ model_name|title }}s(MethodView):
 
-  def get(self, page=1):
-    {{ model_name }}s = {{ model_name|title }}.objects.order_by('-{{ model_name }}_time').paginate(page, per_page=10)
-    return render_template('{{ model_name }}s/list.html', {{ model_name }}s={{ model_name }}s)
+    def get(self, page=1):
+        {{ model_name }}s = {{ model_name|title }}.objects.order_by('-{{ model_name }}_time').paginate(page, per_page=10)
+        return render_template('{{ model_name }}s/list.html', {{ model_name }}s={{ model_name }}s)
 
 
 class Show{{ model_name|title }}(MethodView):
 
-  def get(self, id):
-    {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id )
-    return render_template('{{ model_name }}s/show.html', {{ model_name }}={{ model_name }})
+    def get(self, id):
+        {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id)
+        return render_template('{{ model_name }}s/show.html', {{ model_name }}={{ model_name }})
 
 
 class Edit{{ model_name|title }}(MethodView):
 
-  def get(self, id):
-    {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id )
-    header_text = "Edit This {{ model_name|title }}"
-    return render_template('{{ model_name }}s/edit.html', {{ model_name }}={{ model_name }}, header_text=header_text)
+    def get(self, id):
+        {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id)
+        header_text = "Edit This {{ model_name|title }}"
+        return render_template('{{ model_name }}s/edit.html', {{ model_name }}={{ model_name }}, header_text=header_text)
 
 
 class New{{ model_name|title }}(MethodView):
 
-  def get_context(self, id=None):
-    form_cls = model_form({{ model_name|title }}, exclude=('created_at', 'updated_at'))
+    def get_context(self, id=None):
+        form_cls = model_form({{ model_name|title }}, exclude=('created_at', 'updated_at'))
 
-    if id:
-      {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id)
-      header_text = "Edit This {{ model_name|title }}"
-      if request.method == 'POST':
-        form = form_cls(request.form, initial={{ model_name }}._data)
-      else:
-        form = form_cls(obj={{ model_name }})
-    else:
-      {{ model_name }} = {{ model_name|title }}()
-      header_text = "Add a New {{ model_name|title }}"
-      form = form_cls(request.form)
+        if id:
+            {{ model_name }} = {{ model_name|title }}.objects.get_or_404(id=id)
+            header_text = "Edit This {{ model_name|title }}"
+            if request.method == 'POST':
+                form = form_cls(request.form, initial={{ model_name }}._data)
+            else:
+                form = form_cls(obj={{ model_name }})
+        else:
+            {{ model_name }} = {{ model_name|title }}()
+            header_text = "Add a New {{ model_name|title }}"
+            form = form_cls(request.form)
 
-    context = {
+        context = {
             "{{ model_name }}": {{ model_name }},
             "form": form,
             "header_text": header_text,
             "create": id is None
-    }
+        }
 
-    return context
+        return context
 
+    def get(self, id=None):
+        context = self.get_context(id)
+        return render_template('{{ model_name }}s/new.html', **context)
 
-  def get(self, id=None):
-    context = self.get_context(id)
-    return render_template('{{ model_name }}s/new.html', **context)
+    def post(self, id=None):
+        context = self.get_context(id)
+        form = context.get('form')
 
-  def post(self, id=None):
-    context = self.get_context(id)
-    form = context.get('form')
+        if form.validate():
+            {{ model_name }} = context.get('{{ model_name }}')
+            form.populate_obj({{ model_name }})
 
-    if form.validate():
-      {{ model_name }} = context.get('{{ model_name }}')
-      form.populate_obj({{ model_name }})
+            # Add the {{ model_name }}_time value, or update it
+            cal = parsedatetime.Calendar()
+            time_struct, parse_status = cal.parse({{ model_name }}['date'])
+            {{ model_name }}['{{ model_name }}_time'] = datetime.fromtimestamp(mktime(time_struct))
+            {{ model_name }}['updated_at'] = datetime.now()
 
-      # Add the {{ model_name }}_time value, or update it
-      cal = parsedatetime.Calendar()
-      time_struct, parse_status = cal.parse({{ model_name }}['date'])
-      {{ model_name }}['{{ model_name }}_time'] = datetime.fromtimestamp(mktime(time_struct))
-      {{ model_name }}['updated_at'] = datetime.now()
+            {{ model_name }}.save()
 
-      {{ model_name }}.save()
-
-      return redirect(url_for('{{ model_name }}s.list'))
-    return render_template('{{ model_name }}s/new.html', **context)
-
+            return redirect(url_for('{{ model_name }}s.list'))
+        return render_template('{{ model_name }}s/new.html', **context)
 
 
 # Register the urls
@@ -90,3 +88,4 @@ class New{{ model_name|title }}(MethodView):
 {{ model_name }}s.add_url_rule('/{{ model_name }}s/create/', defaults={'id': None}, view_func=New{{ model_name|title }}.as_view('create'))
 {{ model_name }}s.add_url_rule('/{{ model_name }}s/<id>/', view_func=Show{{ model_name|title }}.as_view('show'))
 {{ model_name }}s.add_url_rule('/{{ model_name }}s/edit/<id>/', view_func=New{{ model_name|title }}.as_view('edit'))
+

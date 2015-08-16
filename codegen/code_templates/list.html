@@ -19,7 +19,7 @@
 <table class="table table-striped table-hover">
   <tr>
     {% for key, value in fields.items(): -%}
-    <th>{{ key }}</th>
+    <th>{{ key.replace("_"," ")|title }}</th>
     {% endfor -%}
     <th>&nbsp;</th>
   </tr>
