@@ -51,6 +51,9 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 * Track what you eat and drink, along with your mood at the time
 * Track your exercise along with motivation levels
 
+### Developer-Specific Features
+* Basic code generator to generate the model, view, and list, new and show templates.
+
 
 ### The ToDo List
 
