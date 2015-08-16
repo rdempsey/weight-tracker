@@ -55,6 +55,10 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 ### The ToDo List
 
 * Add tiny habits (track the tiny habits you want to implement in your life)
+* Add goals
+    * Your big why + emotional significance
+    * Point A: starting point (SMART)
+    * Point B: define your goal (SMART)
 * Add supplement intake tracking; currently this is part of food intake
 * Add charty goodness to the homepage to show progress
   * How much time between meals per day, as a trend
