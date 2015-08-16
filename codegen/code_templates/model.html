@@ -1,0 +1,13 @@
+from datetime import datetime
+from weighttracker import db
+
+
+class {{ model_name|title }}(db.Document):
+
+    {% for key, value in fields.items(): -%}
+    {{ key }} = db.{{ value|title() }}Field()
+    {% endfor -%}
+    created_at = db.DateTimeField(default=datetime.now(), required=True)
+    updated_at = db.DateTimeField(default=datetime.now(), required=True)
+    deleted_at = db.DateTimeField(default=datetime.now(), required=True)
+
