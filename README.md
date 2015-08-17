@@ -46,7 +46,7 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 
 ### Features
 
-* Track weight, body fat percentage, and three body measurements
+* Track weight, body fat percentage, and     three body measurements
 * Add and manage inspirational phrases
 * Track what you eat and drink, along with your mood at the time
 * Track your exercise along with motivation levels
@@ -70,3 +70,16 @@ Start tracking your stats by browsing to [http://localhost:5000](http://localhos
 * Add a predictive model for weight
 * Add a resource section
 * Add satiety to the food journal: level of hunger before/after eating
+
+### Weight Tracker Code Generator
+
+The code generator is found in the codegen folder.
+
+1. Given the name of the object to create and the fields, the script will generate the:
+  * Model
+  * View
+  * Templates: list, new, show
+2. Once the files are generated:
+    * Manually register the blueprint in __init__.py
+    * Add the paths to the navigation in templates/base.html
+    * Update the model with any field-level restrictions
