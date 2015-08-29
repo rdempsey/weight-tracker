@@ -19,21 +19,19 @@
 <table class="table table-striped table-hover">
   <tr>
     <th>Date</th>
-    <th>Weight</th>
+    <th>Scale Weight</th>
     <th>Body Fat Percentage</th>
-    <th>Suprailiac</th>
-    <th>Abdominal</th>
-    <th>Thigh</th>
+    <th>Stomach</th>
+    <th>Hips</th>
     <th>&nbsp;</th>
   </tr>
   {% for measurement in measurements.items %}
   <tr>
     <td><a href="{{ url_for('measurements.show', id=measurement.id) }}">{{ measurement.date }}</a></td>
-    <td>{{measurement.weight}}</td>
-    <td>{{measurement.body_fat_percentage}}</td>
-    <td>{{measurement.suprailiac}}</td>
-    <td>{{measurement.abdominal}}</td>
-    <td>{{measurement.thigh}}</td>
+    <td>{{ measurement.weight }}</td>
+    <td>{{ measurement.body_fat_percentage }}</td>
+    <td>{{ measurement.stomach }}</td>
+    <td>{{ measurement.hips }}</td>
     <td><a href="{{ url_for('measurements.edit', id=measurement.id) }}">Edit</a></td>
   </tr>
   {% endfor %}
